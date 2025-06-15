@@ -158,7 +158,7 @@ Summary: The Linux kernel
 #  to build the base kernel using the debug configuration. (Specifying
 #  the --with-release option overrides this setting.)
 %define debugbuildsenabled 1
-# define buildid .local
+%define buildid .rocknix
 %define specrpmversion 6.15.1
 %define specversion 6.15.1
 %define patchversion 6.15
@@ -168,7 +168,7 @@ Summary: The Linux kernel
 # This is needed to do merge window version magic
 %define patchlevel 15
 # This allows pkg_release to have configurable %%{?dist} tag
-%define specrelease 200%{?buildid}%{?dist}
+%define specrelease 201%{?buildid}%{?dist}
 # This defines the kabi tarball version
 %define kabiversion 6.15.1
 
@@ -1113,6 +1113,30 @@ Source4002: gating.yaml
 %if !%{nopatches}
 
 Patch1: patch-%{patchversion}-redhat.patch
+Patch2: 0000-sm8250-retroidpocket-common.patch
+Patch3: 0001-sm8250-makefile.patch
+Patch4: 0002-sm8250-retroidpocket-rp5.patch
+Patch5: 0003-sm8250-retroidpocket-rpmini.patch
+Patch6: 0004-pm8150b.patch
+Patch7: 0005-sm8250-uart.patch
+Patch8: 0007-panel-ddic-ch13726a.patch
+Patch9: 0008-retroid-gamepad.patch
+Patch10: 0009-qcom-spmi-haptics.patch
+Patch11: 0010-leds-htr3212.patch
+Patch12: 0011-qcom-pm8150b-charger.patch
+Patch13: 0012-ASoC-qcom-q6asm-dai-Change-some-default-periods.patch
+Patch14: 0013-add-force-feedback.patch
+Patch15: 0014-fix-wifi-and-bt-mac.patch
+Patch16: 0015-add-missing-opp-cpu7.patch
+Patch17: 0016-fix-vol-up-with-custom-uboot.patch
+Patch18: 0017-drm-panel-ddic-ch13726a-add-support-for-rpminiv2.patch
+Patch19: 0018-arm64-dts-qcom-sm8250-add-support-for-Retroid-Pocket.patch
+Patch20: 0019-arm64-dts-qcom-sm8250-add-support-for-Retroid-Pocket.patch
+Patch21: 0020-panel-ddic-ch13726a-stutter-fix.patch
+Patch22: 0100-revert-force-16bit-audio.patch
+Patch23: 9997-set-boot-fanspeed.patch
+Patch24: 9998-gpu-opp-table.patch
+Patch25: 9999-remove-log-spam.patch
 %endif
 
 # empty final patch to facilitate testing of kernel patches
@@ -1940,6 +1964,30 @@ cp -a %{SOURCE1} .
 %if !%{nopatches}
 
 ApplyOptionalPatch patch-%{patchversion}-redhat.patch
+ApplyOptionalPatch 0000-sm8250-retroidpocket-common.patch
+ApplyOptionalPatch 0001-sm8250-makefile.patch
+ApplyOptionalPatch 0002-sm8250-retroidpocket-rp5.patch
+ApplyOptionalPatch 0003-sm8250-retroidpocket-rpmini.patch
+ApplyOptionalPatch 0004-pm8150b.patch
+ApplyOptionalPatch 0005-sm8250-uart.patch
+ApplyOptionalPatch 0007-panel-ddic-ch13726a.patch
+ApplyOptionalPatch 0008-retroid-gamepad.patch
+ApplyOptionalPatch 0009-qcom-spmi-haptics.patch
+ApplyOptionalPatch 0010-leds-htr3212.patch
+ApplyOptionalPatch 0011-qcom-pm8150b-charger.patch
+ApplyOptionalPatch 0012-ASoC-qcom-q6asm-dai-Change-some-default-periods.patch
+ApplyOptionalPatch 0013-add-force-feedback.patch
+ApplyOptionalPatch 0014-fix-wifi-and-bt-mac.patch
+ApplyOptionalPatch 0015-add-missing-opp-cpu7.patch
+ApplyOptionalPatch 0016-fix-vol-up-with-custom-uboot.patch
+ApplyOptionalPatch 0017-drm-panel-ddic-ch13726a-add-support-for-rpminiv2.patch
+ApplyOptionalPatch 0018-arm64-dts-qcom-sm8250-add-support-for-Retroid-Pocket.patch
+ApplyOptionalPatch 0019-arm64-dts-qcom-sm8250-add-support-for-Retroid-Pocket.patch
+ApplyOptionalPatch 0020-panel-ddic-ch13726a-stutter-fix.patch
+ApplyOptionalPatch 0100-revert-force-16bit-audio.patch
+ApplyOptionalPatch 9997-set-boot-fanspeed.patch
+ApplyOptionalPatch 9998-gpu-opp-table.patch
+ApplyOptionalPatch 9999-remove-log-spam.patch
 %endif
 
 ApplyOptionalPatch linux-kernel-test.patch
@@ -4261,6 +4309,9 @@ fi\
 #
 #
 %changelog
+* Wed Jun 11 2025 Grillo del Mal <grillo_delmal@fedoraproject.org> [6.15.1-201]
+- Toying around with some patches n stuff
+
 * Wed Jun 04 2025 Justin M. Forbes <jforbes@fedoraproject.org> [6.15.1-0]
 - arm64: dts: rockchip: Drop assigned-clock* from cpu nodes on rk3588 (Diederik de Haas)
 - arm64: dts: rockchip: Improve LED config for NanoPi R5S (Diederik de Haas)
